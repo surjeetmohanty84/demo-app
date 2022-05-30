@@ -18,21 +18,19 @@ pipeline {
                     image 'openjdk:11'
                 }
             }
+         }
+         stage("docker build & docker push"){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonar-token') {
-                            sh 'chmod +x gradlew'
-                            sh './gradlew sonarqube'
+                   withCredentials([usernameColonPassword(credentialsId: 'Docer_Credential', variable: 'dockercredential')]) {
+                             sh '''
+                                docker build -t dockerrock123/springdemo:${VERSION} .
+                                docker login -u dockerrock123 -p dockerrock123 dockerrock123:8083 
+                                docker push  dockerrock123/springdemo:${VERSION}
+                                docker rmi dockerrock123/springdemo:${VERSION}
+                            '''
                     }
-
-                    timeout(time: 1, unit: 'HOURS') {
-                      def qg = waitForQualityGate()
-                      if (qg.status != 'OK') {
-                           error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                      }
-                    }
-
-                }  
+                }
             }
         }
    }
