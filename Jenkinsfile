@@ -16,7 +16,8 @@ pipeline {
             steps{
                 script{
                    withCredentials([usernameColonPassword(credentialsId: 'Docer_Credential', variable: 'dockercredential')]) {
-                             sh '''
+                           sh 'chmod +x ///var/run/docker.sock'  
+			   sh '''
                                 docker build -t dockerrock123/springdemo:${VERSION} .
                                 docker login -u dockerrock123 -p dockerrock123 dockerrock123:8083 
                                 docker push  dockerrock123/springdemo:${VERSION}
