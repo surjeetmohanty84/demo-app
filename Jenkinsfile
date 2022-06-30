@@ -50,5 +50,16 @@ pipeline {
                }
            }
         }
+        stage('Example Build') {
+           steps {
+               script {
+                   kubernetesDeploy(
+		    	configs: 'deployment.yml',
+		    	kubeconfigId: 'KUBERNETES_CLUSTER',
+		    	enableConfigSubstitution: true
+		    )
+               }
+           }
+        }
     }
 }
