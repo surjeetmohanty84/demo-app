@@ -50,13 +50,13 @@ pipeline {
                }
            }
         }
-        stage('Identifying misconfig using datree in helm charts') {
+        stage('Deploying ') {
            steps {
                script {
-               	dir('helm-chart/') {
-    				bat 'helm datree test springboot/'
-    			}                
-                 }
+                   withCredentials([kubeconfigFile(credentialsId: 'KUBERNETES_CLUSTER', variable: 'KUBECONFIG')]) {
+						bat "kubectl get nodes"
+					}
+               }
            }
         }
     }
