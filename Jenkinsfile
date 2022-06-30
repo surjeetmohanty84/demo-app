@@ -20,5 +20,16 @@ pipeline {
                }
            }
         }
+        stage('Sonar Qube Test') {
+           steps {
+               script {
+                   withSonarQubeEnv(credentialsId: 'sonar-credential') {
+		 	   			def mavenHome= tool name: "maven", type: "maven"
+	    				def cmd= "${mavenHome}/bin/mvn"
+	    				bat "${cmd} sonar:sonar"
+		}
+               }
+           }
+        }
     }
 }
