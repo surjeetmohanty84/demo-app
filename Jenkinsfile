@@ -3,6 +3,10 @@ pipeline {
     environment {
         VERSION="${env.BUILD_ID}"
     }
+    environment{
+        KUBECONFIG="C:\\Users\\USER\\.kube\\config"
+    }
+
     stages {
         stage('Git Clone') {
            steps {
