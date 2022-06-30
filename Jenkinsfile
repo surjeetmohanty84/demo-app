@@ -1,34 +1,13 @@
-pipeline{
-    agent any 
-    environment{
-        VERSION = "${env.BUILD_ID}"
+node{
+    
+    stage('Git Clone'){
+           git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/surjeetmohanty84/demo-app.git'
     }
-    stages{
-    	stage('Construct Code') {
-           steps {
-               script {
-                   // The below will clone your repo and will be checked out to master branch by default.
-				   git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/surjeetmohanty84/demo-app.git'
-               }
-           }
-        }
-        stage('Sonar Code Quality Test'){
-         	agent{
-       			docker{
-       			    image 'openjdk:11'
-       			}
+	stage('Maven Build'){
+	    
+	    def mavenHome= tool name: "maven", type: "maven"
+	    def cmd= "${mavenHome}/bin/mvn"
+	    sh "${cmd} clean install"
+	}
 
-   			}
-           steps{
-               script{
-                   withSonarQubeEnv(credentialsId: 'sonar-password') {
- 						echo('Sonar Qube Ready')
-				}
-               }
-
-           }
-
-          }
-
-	}    
 }
