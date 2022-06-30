@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: demo-app
-        image: dockerrock123/springboot-demo-app:v1
+        image: dockerrock123/springapp:v12
         imagePullPolicy: Always
         readinessProbe:
           httpGet:

@@ -27,6 +27,14 @@ node{
 			}
 			bat "docker push dockerrock123/springapp:v12"
 		}
+		
+		stage('Kubernetes Deployment'){
+		    kubernetesDeploy(
+		    	configs: 'deployment.yml',
+		    	kubeconfigId: 'KUBERNETES_CLUSTER',
+		    	enableConfigSubstitution: true
+		    )
+		}
 
 	                 
 	             }
