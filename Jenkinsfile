@@ -7,7 +7,7 @@ node{
 	    
 	    def mavenHome= tool name: "maven", type: "maven"
 	    def cmd= "${mavenHome}/bin/mvn"
-	    sh "${cmd} clean install"
+	    bat "${cmd} clean install"
 	}
 
 }
