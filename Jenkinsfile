@@ -1,5 +1,8 @@
 node{
-    
+    environment{
+        VERSION="${env.BUILD_ID}"
+    }
+
     stage('Git Clone'){
            git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/surjeetmohanty84/demo-app.git'
     }
@@ -18,7 +21,7 @@ node{
 		}
 		stage('Build Docker Image'){
 		             bat "docker build -t springapp ."
-		             bat "docker tag springapp dockerrock123/springapp:v12"    
+		             bat "docker tag springapp dockerrock123/springapp:${VERSION}"    
 		             }
 		stage('Docker Push'){
 		    echo ("Docker push")
