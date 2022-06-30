@@ -15,8 +15,8 @@ pipeline{
         stage('Sonar Code Quality Test'){
          	agent{
        			docker{
-       			    
-       			    image: 'openjdk:11'
+       			    image 'openjdk:11'
+       			    label 'my label'
        			}
 
    			}
