@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         VERSION="${env.BUILD_ID}"
-        KUBECONFIG="C:\\Users\\USER\\.kube\\config"
     }
     
 
