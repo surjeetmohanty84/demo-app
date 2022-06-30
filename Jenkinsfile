@@ -2,6 +2,8 @@ node{
     environment{
         VERSION="${env.BUILD_ID}"
     }
+	stages{
+	 
 
     stage('Git Clone'){
            git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/surjeetmohanty84/demo-app.git'
@@ -42,5 +44,6 @@ node{
 	                 
 	             }
 
-
+   
+	}
 }
