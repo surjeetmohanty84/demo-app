@@ -4,7 +4,7 @@ pipeline {
         VERSION="${env.BUILD_ID}"
     }
     stages {
-        stage('Example Build') {
+        stage('Git Clone') {
            steps {
                script {
                    git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/surjeetmohanty84/demo-app.git'          
@@ -39,7 +39,7 @@ pipeline {
                }
            }
         }
-        stage('Example Build') {
+        stage('Docker Push') {
            steps {
                script {
                    echo ("Docker push")
