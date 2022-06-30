@@ -12,5 +12,17 @@ pipeline{
                }
            }
         }
-}    
+        stage('Sonar Code Quality Test'){
+                              
+          	agent {
+                  
+          	    docker {
+    	              image 'openjdk:11'
+    	          }
+                  
+          	}
+                    
+          }
+
+	}    
 }
