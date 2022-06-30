@@ -50,15 +50,13 @@ pipeline {
                }
            }
         }
-        stage('Deploy to Kubernetes Cluster') {
+        stage('Identifying misconfig using datree in helm charts') {
            steps {
                script {
-                   kubernetesDeploy(
-		    	configs: 'deployment.yml',
-		    	kubeconfigId: 'KUBERNETES_CLUSTER',
-		    	enableConfigSubstitution: true
-		    )
-               }
+               	dir('helm-chart/') {
+    				bat 'helm datree test springboot/'
+    			}                
+                 }
            }
         }
     }
