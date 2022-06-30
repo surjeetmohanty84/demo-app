@@ -9,5 +9,12 @@ node{
 	    def cmd= "${mavenHome}/bin/mvn"
 	    bat "${cmd} clean install"
 	}
+	stage('Sonar Qube Test'){
+	    def mavenHome= tool name: "maven", type: "maven"
+	    def cmd= "${mavenHome}/bin/mvn"
+	    bat "${cmd} sonar:sonar"
+	                 
+	             }
+
 
 }
