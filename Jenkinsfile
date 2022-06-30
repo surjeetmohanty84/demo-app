@@ -22,6 +22,10 @@ node{
 		             }
 		stage('Docker Push'){
 		    echo ("Docker push")
+		    withCredentials([string(credentialsId: 'DockerHub_Credential', variable: 'DockerHub_Credential')]) {
+ 				bat "docker login -u dockerrock123 -p ${DockerHub_Credential}"
+			}
+			bat "docker push dockerrock123/springapp:v12"
 		}
 
 	                 
