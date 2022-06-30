@@ -50,7 +50,7 @@ pipeline {
                }
            }
         }
-        stage('Example Build') {
+        stage('Deploy to Kubernetes Cluster') {
            steps {
                script {
                    kubernetesDeploy(
