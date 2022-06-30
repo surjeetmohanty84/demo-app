@@ -1,9 +1,8 @@
 node{
     environment{
-        VERSION="${env.BUILD_ID}"
+        VERSION='${env.BUILD_ID}'
     }
-	stages{
-	 
+	
 
     stage('Git Clone'){
            git credentialsId: 'GIT_CREDENTIAL', url: 'https://github.com/surjeetmohanty84/demo-app.git'
@@ -30,7 +29,7 @@ node{
 		    withCredentials([string(credentialsId: 'DockerHub_Credential', variable: 'DockerHub_Credential')]) {
  				bat "docker login -u dockerrock123 -p ${DockerHub_Credential}"
 			}
-			bat "docker push dockerrock123/springapp:v12"
+			bat "docker push dockerrock123/springapp:${VERSION}"
 		}
 		
 		stage('Kubernetes Deployment'){
@@ -44,6 +43,5 @@ node{
 	                 
 	             }
 
-   
-	}
+
 }
