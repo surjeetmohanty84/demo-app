@@ -16,6 +16,14 @@ node{
 	    	bat "${cmd} sonar:sonar"
 	
 		}
+		stage('Build Docker Image'){
+		             bat "docker build -t springapp ."
+		             bat "docker tag springapp dockerrock123/springapp:v12"    
+		             }
+		stage('Docker Push'){
+		    echo ("Docker push")
+		}
+
 	                 
 	             }
 
