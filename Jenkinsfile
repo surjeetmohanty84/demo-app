@@ -31,5 +31,24 @@ pipeline {
                }
            }
         }
+        stage('Docker Build') {
+           steps {
+               script {
+                     bat "docker build -t springapp ."
+		             bat "docker tag springapp dockerrock123/springapp:${VERSION}"
+               }
+           }
+        }
+        stage('Example Build') {
+           steps {
+               script {
+                   echo ("Docker push")
+		    		withCredentials([string(credentialsId: 'DockerHub_Credential', variable: 'DockerHub_Credential')]) {
+ 						bat "docker login -u dockerrock123 -p ${DockerHub_Credential}"
+					}
+					bat "docker push dockerrock123/springapp:${VERSION}"
+               }
+           }
+        }
     }
 }
