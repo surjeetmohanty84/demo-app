@@ -20,7 +20,7 @@ pipeline{
        			}
 
    			}
-           step{
+           steps{
                script{
                    withSonarQubeEnv(credentialsId: 'sonar-password') {
  						echo('Sonar Qube Ready')
